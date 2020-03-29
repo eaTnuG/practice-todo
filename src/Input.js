@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
+import { TYPE, STATUS } from "./const";
+
 const Input = ({ hanldeAddTodo }) => {
-  const [type, setType] = useState("공부");
+  const [type, setType] = useState(TYPE.STUDY);
   const [label, setLabel] = useState("");
 
   const handleChangeType = event => setType(event.target.value);
@@ -10,17 +12,17 @@ const Input = ({ hanldeAddTodo }) => {
   const handleChangeLabel = event => setLabel(event.target.value);
 
   const handleSubmit = () => {
-    hanldeAddTodo({ type, label, status: "yet" });
+    hanldeAddTodo({ type, label, status: STATUS.YET });
     setLabel("");
-    setType("공부");
+    setType(TYPE.STUDY);
   };
   return (
     <Wrapper>
       <Container>
-        <TypeSelector onChange={handleChangeType} defaultValue={"공부"}>
-          <Option value="공부">공부</Option>
-          <Option value="블로그">블로그</Option>
-          <Option value="기타">기타</Option>
+        <TypeSelector onChange={handleChangeType} defaultValue={TYPE.STUDY}>
+          {Object.entries(TYPE).map(([key, value]) => (
+            <Option value={value}>{value}</Option>
+          ))}
         </TypeSelector>
         <LabelArea>
           <Label onChange={handleChangeLabel} value={label} />

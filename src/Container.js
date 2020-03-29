@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import Header from "./Header";
 import Item from "./Item";
 import Input from "./Input";
 
-const TYPE = {
-  STUDY: "공부",
-  BLOG: "블로그",
-  ETC: "기타"
-};
-
-const STATUS = {
-  DONE: "done",
-  YET: "yet",
-  DELETED: "deleted"
-};
+import { STATUS } from "./const";
 
 const Container = props => {
-  const [todos, setTodos] = useState([{ type: TYPE.STUDY, label: "스토리북 정리하기", status: STATUS.DONE }]);
+  const [todos, setTodos] = useState([]);
 
   const hanldeAddTodo = todo => setTodos([...todos, todo]);
+
   const handleStatusChange = todo =>
     setTodos(
       todos.map(_todo => {
@@ -31,6 +23,7 @@ const Container = props => {
         } else return _todo;
       })
     );
+
   return (
     <Wrapper>
       <Header />
